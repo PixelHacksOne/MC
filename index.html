@@ -18,9 +18,6 @@
         background: url('https://i.postimg.cc/bvypj8n4/phone-wallpaper-v0-anrmmvmkl8nb1.jpg') no-repeat center center fixed;
         background-size: cover;
       }
-      .cuenta {
-        width: 90%;
-      }
     }
     header {
       text-align: center;
@@ -45,76 +42,77 @@
       font-size: 1em;
       margin-top: 10px;
     }
-    .cuentas {
+    .boton-ver-cuentas {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      color: white;
+      background: #0070ba;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .boton-ver-cuentas:hover {
+      background: #005ea6;
+    }
+    #modalCuentas, #modalCompra {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      flex-direction: column;
+    }
+    .contenidoModalCuentas {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      width: 90%;
+      height: 90%;
+      overflow-y: auto;
+      border-radius: 15px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      margin: 30px 20px;
       gap: 10px;
+      justify-content: center;
+      position: relative;
+    }
+    .contenidoModalCompra {
+      background: rgba(34,34,34,0.95);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px #00ffff;
+      width: 300px;
+      position: relative;
     }
     .cuenta {
       background: rgba(45, 87, 44, 0.5);
       border: 2px solid #3e773e;
-      padding: 15px 20px;
+      padding: 10px 20px;
       border-radius: 10px;
-      font-size: 1em;
+      font-size: 1.2em;
+      color: white;
       cursor: pointer;
-      transition: 0.3s;
-      text-align: center;
       min-width: 150px;
-      color: #ffffff;
+      text-align: center;
+      transition: 0.3s;
     }
     .cuenta:hover {
       background: rgba(62, 119, 62, 0.7);
       box-shadow: 0 0 10px #00ff00;
     }
-    .no-disponible {
-      background: rgba(122, 24, 24, 0.5);
-      border: 2px solid #ff0000;
-      text-decoration: line-through;
-      cursor: not-allowed;
-      position: relative;
-    }
-    .no-disponible::after {
-      content: "❌ No disponible";
-      color: red;
-      font-size: 0.8em;
-      position: absolute;
-      top: -10px;
-      right: -10px;
-    }
-    #pagoModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      animation: aparecer 0.4s ease;
-    }
-    @keyframes aparecer {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    #pagoModal .contenido {
-      background: rgba(34,34,34,0.95);
-      padding: 30px 20px;
-      border-radius: 15px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 0 20px #00ffff;
-    }
     .cerrarModal {
       position: absolute;
       top: 10px;
       right: 15px;
+      font-size: 1.5em;
+      color: white;
       background: transparent;
       border: none;
-      color: white;
-      font-size: 1.5em;
       cursor: pointer;
     }
     .botonPaypal {
@@ -127,15 +125,27 @@
       border-radius: 10px;
       cursor: pointer;
       font-size: 1.2em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: background 0.3s;
+      transition: 0.3s;
       text-decoration: none;
+      display: inline-block;
     }
     .botonPaypal:hover {
       background: #005ea6;
+    }
+    .reseñas {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 40px 20px;
+      padding: 20px;
+      border-radius: 15px;
+    }
+    .reseña {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #00ffff;
+      padding-bottom: 10px;
+    }
+    .estrellas {
+      color: gold;
+      font-size: 1.2em;
     }
     footer {
       text-align: center;
@@ -147,6 +157,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <header>¡Bienvenido a la mejor tienda de cuentas Minecraft Premium!</header>
@@ -172,71 +183,154 @@
 
 <h2 style="text-align:center;margin-top:40px;">Cuentas Premium Disponibles</h2>
 
-<div class="cuentas" id="listaCuentas"></div>
+<button class="boton-ver-cuentas" onclick="abrirModalCuentas()">Ver cuentas disponibles</button>
 
-<div id="pagoModal">
-  <div class="contenido">
-    <button class="cerrarModal" onclick="cerrarModal()">×</button>
-    <h3>¡Compra tu cuenta Premium!</h3>
-    <p>Envía $5 USD mediante PayPal para recibir tu cuenta premium en tu correo.</p>
-    <a class="botonPaypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=dangermedina87@gmail.com&item_name=Cuenta+Premium+Minecraft&amount=5&currency_code=USD" target="_blank">
-      <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" style="width:24px;height:24px;"> Pagar con PayPal
-    </a>
+<!-- Modal de Cuentas -->
+<div id="modalCuentas">
+  <div class="contenidoModalCuentas" id="contenedorCuentas">
+    <button class="cerrarModal" onclick="cerrarModalCuentas()">×</button>
   </div>
 </div>
 
-<footer>
-  © 2025 | Contacto en Telegram: @WConnet
-</footer>
+<!-- Modal Confirmación de Compra -->
+<div id="modalCompra">
+  <div class="contenidoModalCompra">
+    <button class="cerrarModal" onclick="cerrarModalCompra()">×</button>
+    <h3>Adquiriendo cuenta:</h3>
+    <p id="nombreCuentaSeleccionada" style="font-weight: bold; color: #00ffff; margin: 10px 0;"></p>
+    <p>Esta cuenta ha estado inactiva por 5 años.<br>Precio: $5 USD</p>
+    <a id="botonPaypal" class="botonPaypal" target="_blank">Pagar con PayPal</a>
+  </div>
+</div>
+
+<section class="reseñas">
+  <h2 style="text-align:center;">Opiniones de Clientes</h2>
+
+  <div class="reseña">
+    <div class="estrellas">⭐⭐⭐⭐☆</div>
+    <p><strong>Juan456:</strong> Me tardaron como una hora en mandarme la cuenta pero funcionó bien. Muy buen sistema, le doy 4 estrellas.</p>
+  </div>
+
+  <div class="reseña">
+    <div class="estrellas">⭐⭐⭐☆☆</div>
+    <p><strong>CaneloLaLarona:</strong> La cuenta llegó pero tuve que esperar como 2 horas, igual me sirvió, ya cambié el nombre y todo bien.</p>
+  </div>
+
+  <div class="reseña">
+    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+    <p><strong>Lorenzo Rodríguez:</strong> Todo perfecto, me llegó rápido y ya llevo usando la cuenta varias semanas.</p>
+  </div>
+
+  <div class="reseña">
+    <div class="estrellas">⭐⭐⭐☆☆</div>
+    <p><strong>SofiMendoza:</strong> Buen servicio aunque tardó un poco. Recomiendo si no tienes mucha prisa.</p>
+  </div>
+
+  <div class="reseña">
+    <div class="estrellas">⭐⭐⭐⭐☆</div>
+    <p><strong>David_CR7:</strong> Muy confiable. Volvería a comprar otra cuenta seguro.</p>
+  </div>
+</section>
+
 
 <script>
 const cuentas = [
   "DragonKnight", "PixelCrafter", "BlockyMaster", "RedstonePro", "CraftManiac",
   "ZombieKiller", "EpicMiner", "CreeperHunter", "EnderSlayer", "SkyBuilder",
   "NetherWalker", "DiamondDream", "SwordMaster", "SteveBoss", "GoldenMiner",
-  "MagicCrafter", "WolfTamer", "OceanExplorer", "ForestRanger", "IceWarrior",
-  "ShadowBuilder", "PortalRunner", "PotionWizard", "IronMiner", "TreeChopper",
-  "StoneBreaker", "PixelArtist", "PvPKing", "RedstoneNinja", "XPGrinder",
-  "TreasureSeeker", "SkyHighFlyer", "WitherHunter", "LavaSurvivor", "BiomeFinder",
-  "DragonTamer", "VillageHero", "CastleBuilder", "SandSurvivor", "DeepMiner",
-  "LuckyCrafter", "SwordCrafter", "SkeletonSmasher", "MegaBuilder", "PixelKing",
-  "SlimeCrusher", "SnowWarrior", "ObsidianKing", "CraftMaster", "BattleMiner",
-  "EnchantmentLord", "TrapMaster", "MobSlayer", "KingOfPvP", "IceCrafter",
-  "EmeraldHunter", "NightRunner", "MiningBeast", "MagicMiner", "GladiatorSteve",
-  "RedstoneGeek", "DragonSoul", "ForestCrafter", "AquaMiner", "SnowCrafter",
-  "LavaMaster", "ShadowCrafter", "SkeletonRunner", "TNTExpert", "DungeonExplorer",
-  "PixelRunner", "GoldenCrafter", "MagicSlayer", "BuilderHero", "CraftingMaster",
-  "StoneWarrior", "XPSeeker", "WitchHunter", "ServerChampion", "PvPGladiator",
-  "TreasureCrafter", "SnowExplorer", "OceanRunner", "PixelSurvivor", "SkyRider",
-  "WitherDestroyer", "EnderCrafter", "LavaWarrior", "BiomeExplorer", "DiamondCrafter"
+  "MagicCrafter", "WolfTamer", "OceanExplorer", "ForestRanger", "IceWarrior"
 ];
-const noDisponibles = [10, 25, 40, 55, 70];
 
-function crearCuentas() {
-  const contenedor = document.getElementById('listaCuentas');
-  cuentas.forEach((nombre, index) => {
-    const boton = document.createElement('div');
-    boton.className = 'cuenta' + (noDisponibles.includes(index) ? ' no-disponible' : '');
-    boton.innerText = nombre + ' - $5';
-    if (!noDisponibles.includes(index)) {
-      boton.onclick = () => abrirModal();
-    }
-    contenedor.appendChild(boton);
+function abrirModalCuentas() {
+  document.getElementById('modalCuentas').style.display = 'flex';
+  llenarCuentas();
+}
+
+function cerrarModalCuentas() {
+  document.getElementById('modalCuentas').style.display = 'none';
+}
+
+function llenarCuentas() {
+  const contenedor = document.getElementById('contenedorCuentas');
+  contenedor.innerHTML = '<button class="cerrarModal" onclick="cerrarModalCuentas()">×</button>';
+  cuentas.forEach(nombre => {
+    const div = document.createElement('div');
+    div.className = 'cuenta';
+    div.innerText = nombre;
+    div.onclick = () => seleccionarCuenta(nombre);
+    contenedor.appendChild(div);
   });
 }
 
-function abrirModal() {
-  document.getElementById('pagoModal').style.display = 'flex';
+function seleccionarCuenta(nombre) {
+  document.getElementById('modalCompra').style.display = 'flex';
+  document.getElementById('nombreCuentaSeleccionada').innerText = nombre;
+  document.getElementById('botonPaypal').href = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=dangermedina87@gmail.com&item_name=Cuenta+" + encodeURIComponent(nombre) + "&amount=5&currency_code=USD";
+}
+
+function cerrarModalCompra() {
+  document.getElementById('modalCompra').style.display = 'none';
+}
+function abrirModalComentario() {
+  document.getElementById('modalComentario').style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
-function cerrarModal() {
-  document.getElementById('pagoModal').style.display = 'none';
+function cerrarModalComentario() {
+  document.getElementById('modalComentario').style.display = 'none';
   document.body.style.overflow = 'auto';
 }
 
-crearCuentas();
-</script>
+function enviarComentario() {
+  const nombre = document.getElementById('nombreUsuario').value.trim();
+  const estrellas = document.getElementById('estrellasUsuario').value;
+  const comentario = document.getElementById('comentarioUsuario').value.trim();
+  const contenedor = document.querySelector('.reseñas');
 
+  if (nombre && estrellas && comentario) {
+    const nuevaReseña = document.createElement('div');
+    nuevaReseña.className = 'reseña';
+    nuevaReseña.innerHTML = `
+      <div class="estrellas">${'⭐'.repeat(estrellas)}${'☆'.repeat(5 - estrellas)}</div>
+      <p><strong>${nombre}:</strong> ${comentario}</p>
+    `;
+    contenedor.appendChild(nuevaReseña);
+
+    document.getElementById('nombreUsuario').value = '';
+    document.getElementById('estrellasUsuario').value = '5';
+    document.getElementById('comentarioUsuario').value = '';
+
+    document.getElementById('mensajeEnviado').style.display = 'block';
+
+    setTimeout(() => {
+      document.getElementById('mensajeEnviado').style.display = 'none';
+      cerrarModalComentario();
+    }, 1500);
+  }
+}
+</script>
+<div style="text-align:center;">
+  <button class="boton-ver-cuentas" onclick="abrirModalComentario()">Deja tu comentario</button>
+</div>
+
+<!-- Modal Comentario -->
+<div id="modalComentario" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:1000;">
+  <div style="background:rgba(34,34,34,0.95);padding:30px;border-radius:15px;text-align:center;box-shadow:0 0 20px #00ffff;width:300px;position:relative;">
+    <button class="cerrarModal" onclick="cerrarModalComentario()">×</button>
+    <h3>Deja tu opinión</h3>
+    <input id="nombreUsuario" type="text" placeholder="Tu nombre" style="width:90%;margin:10px 0;padding:10px;border-radius:10px;border:none;">
+    <select id="estrellasUsuario" style="width:90%;margin:10px 0;padding:10px;border-radius:10px;border:none;">
+      <option value="5">⭐⭐⭐⭐⭐ (5 estrellas)</option>
+      <option value="4">⭐⭐⭐⭐☆ (4 estrellas)</option>
+      <option value="3">⭐⭐⭐☆☆ (3 estrellas)</option>
+      <option value="2">⭐⭐☆☆☆ (2 estrellas)</option>
+      <option value="1">⭐☆☆☆☆ (1 estrella)</option>
+    </select>
+    <textarea id="comentarioUsuario" placeholder="Escribe tu comentario..." rows="4" style="width:90%;margin:10px 0;padding:10px;border-radius:10px;border:none;"></textarea>
+    <button class="botonPaypal" onclick="enviarComentario()">Enviar</button>
+    <div id="mensajeEnviado" style="color:#00ff00;margin-top:10px;font-weight:bold;display:none;">¡Gracias por tu opinión!</div>
+  </div>
+</div>
 </body>
-</html>
+<footer>  © 2025 | Contacto en Telegram: @WConnet</footer>
+  </html>
