@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venta de Cuentas Premium Minecraft</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('https://i.postimg.cc/TYbRVtGN/IMG-20250426-WA0030.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+    }
+    @media (max-width: 768px) {
+      body {
+        background: url('https://i.postimg.cc/bvypj8n4/phone-wallpaper-v0-anrmmvmkl8nb1.jpg') no-repeat center center fixed;
+        background-size: cover;
+      }
+      .cuenta {
+        width: 90%;
+      }
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      font-size: 2.5em;
+      color: #00ffff;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffff;
+    }
+    .bienvenida, .pregunta {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      margin: 20px;
+      border-radius: 15px;
+      font-size: 1.2em;
+    }
+    .pregunta h2 {
+      font-size: 2em;
+      color: #ffffff;
+    }
+    .pregunta p {
+      font-size: 1em;
+      margin-top: 10px;
+    }
+    .cuentas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px 20px;
+      gap: 10px;
+    }
+    .cuenta {
+      background: rgba(45, 87, 44, 0.5);
+      border: 2px solid #3e773e;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+      min-width: 150px;
+      color: #ffffff;
+    }
+    .cuenta:hover {
+      background: rgba(62, 119, 62, 0.7);
+      box-shadow: 0 0 10px #00ff00;
+    }
+    .no-disponible {
+      background: rgba(122, 24, 24, 0.5);
+      border: 2px solid #ff0000;
+      text-decoration: line-through;
+      cursor: not-allowed;
+      position: relative;
+    }
+    .no-disponible::after {
+      content: "❌ No disponible";
+      color: red;
+      font-size: 0.8em;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+    #pagoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: aparecer 0.4s ease;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #pagoModal .contenido {
+      background: rgba(34,34,34,0.95);
+      padding: 30px 20px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 20px #00ffff;
+    }
+    .cerrarModal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    .botonPaypal {
+      margin-top: 20px;
+      background: #0070ba;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+    .botonPaypal:hover {
+      background: #005ea6;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      font-size: 0.9em;
+      border-top: 2px solid #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+<header>¡Bienvenido a la mejor tienda de cuentas Minecraft Premium!</header>
+
+<section class="bienvenida">
+  <p>¿Te aburres jugando solo? Aquí te damos la oportunidad de jugar con personas premium en servidores premium, con cuentas que han estado inactivas por más de 7 años. ¡Obtén tu cuenta premium al mejor precio adaptado a tu billetera!</p>
+</section>
+
+<section class="pregunta">
+  <h2>¿Por qué usar esta página?</h2>
+  <p>Contamos con seguridad de primer nivel. Nuestra plataforma valida automáticamente los pagos, protege tu información personal y garantiza entregas rápidas. Todo nuestro sistema está bien hecho para que tengas la mejor experiencia.</p>
+</section>
+
+<section class="pregunta">
+  <h2>¿Por qué es aburrido jugar con personas no Premium?</h2>
+  <p>Las personas Premium disfrutan de servidores exclusivos, mejores recompensas, skins personalizadas y acceso completo a todo el contenido del juego. Jugar sin ser Premium limita mucho las opciones y no se aprovecha toda la diversión que Minecraft puede ofrecer.</p>
+</section>
+
+<section class="pregunta">
+  <h2>¿Cómo hacemos esto?</h2>
+  <p>Compramos cuentas Premium de personas que ya no las utilizan y las vendemos a precios muy bajos. Esto nos permite ofrecerte cuentas adaptables a tu bolsillo y 100% funcionales para que disfrutes al máximo de Minecraft.</p>
+</section>
+
+<h2 style="text-align:center;margin-top:40px;">Cuentas Premium Disponibles</h2>
+
+<div class="cuentas" id="listaCuentas"></div>
+
+<div id="pagoModal">
+  <div class="contenido">
+    <button class="cerrarModal" onclick="cerrarModal()">×</button>
+    <h3>¡Compra tu cuenta Premium!</h3>
+    <p>Envía $5 USD mediante PayPal para recibir tu cuenta premium en tu correo.</p>
+    <a class="botonPaypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=dangermedina87@gmail.com&item_name=Cuenta+Premium+Minecraft&amount=5&currency_code=USD" target="_blank">
+      <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" style="width:24px;height:24px;"> Pagar con PayPal
+    </a>
+  </div>
+</div>
+
+<footer>
+  © 2025 | Contacto en Telegram: @WConnet
+</footer>
+
+<script>
+const cuentas = [
+  "DragonKnight", "PixelCrafter", "BlockyMaster", "RedstonePro", "CraftManiac",
+  "ZombieKiller", "EpicMiner", "CreeperHunter", "EnderSlayer", "SkyBuilder",
+  "NetherWalker", "DiamondDream", "SwordMaster", "SteveBoss", "GoldenMiner",
+  "MagicCrafter", "WolfTamer", "OceanExplorer", "ForestRanger", "IceWarrior",
+  "ShadowBuilder", "PortalRunner", "PotionWizard", "IronMiner", "TreeChopper",
+  "StoneBreaker", "PixelArtist", "PvPKing", "RedstoneNinja", "XPGrinder",
+  "TreasureSeeker", "SkyHighFlyer", "WitherHunter", "LavaSurvivor", "BiomeFinder",
+  "DragonTamer", "VillageHero", "CastleBuilder", "SandSurvivor", "DeepMiner",
+  "LuckyCrafter", "SwordCrafter", "SkeletonSmasher", "MegaBuilder", "PixelKing",
+  "SlimeCrusher", "SnowWarrior", "ObsidianKing", "CraftMaster", "BattleMiner",
+  "EnchantmentLord", "TrapMaster", "MobSlayer", "KingOfPvP", "IceCrafter",
+  "EmeraldHunter", "NightRunner", "MiningBeast", "MagicMiner", "GladiatorSteve",
+  "RedstoneGeek", "DragonSoul", "ForestCrafter", "AquaMiner", "SnowCrafter",
+  "LavaMaster", "ShadowCrafter", "SkeletonRunner", "TNTExpert", "DungeonExplorer",
+  "PixelRunner", "GoldenCrafter", "MagicSlayer", "BuilderHero", "CraftingMaster",
+  "StoneWarrior", "XPSeeker", "WitchHunter", "ServerChampion", "PvPGladiator",
+  "TreasureCrafter", "SnowExplorer", "OceanRunner", "PixelSurvivor", "SkyRider",
+  "WitherDestroyer", "EnderCrafter", "LavaWarrior", "BiomeExplorer", "DiamondCrafter"
+];
+const noDisponibles = [10, 25, 40, 55, 70];
+
+function crearCuentas() {
+  const contenedor = document.getElementById('listaCuentas');
+  cuentas.forEach((nombre, index) => {
+    const boton = document.createElement('div');
+    boton.className = 'cuenta' + (noDisponibles.includes(index) ? ' no-disponible' : '');
+    boton.innerText = nombre + ' - $5';
+    if (!noDisponibles.includes(index)) {
+      boton.onclick = () => abrirModal();
+    }
+    contenedor.appendChild(boton);
+  });
+}
+
+function abrirModal() {
+  document.getElementById('pagoModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  document.getElementById('pagoModal').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+crearCuentas();
+</script>
+
+</body>
+</html>
